@@ -244,7 +244,7 @@ fn copy_file<Elf: FileHeader<Endian = Endianness>>(
                                 got_address =
                                     Some(r_offset.wrapping_add(instruction & 0xffff_f000));
                             }
-                            elf::R_RISCV_PCREL_LO12_I => {
+                            elf::R_RISCV_PCREL_LO12_I | elf::R_RISCV_PCREL_LO12_S => {
                                 // May be paired with R_RISCV_GOT_HI20, which requires handling.
                                 if let Some(mut got_address) = got_address.take() {
                                     let info_offset = u64::from(r_offset).wrapping_sub(info_addr);
